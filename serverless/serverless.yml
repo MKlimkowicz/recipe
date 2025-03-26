@@ -1,0 +1,38 @@
+service: recipe-generator
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1 # Change to your preferred region
+  stage: ${opt:stage, 'dev'}
+  environment:
+    OPENAI_API_KEY: ${env:OPENAI_API_KEY, ''}
+  timeout: 30 # Increase timeout to 30 seconds
+  
+  # Set API Gateway CORS settings
+  httpApi:
+    cors: true
+
+functions:
+  generateRecipe:
+    handler: functions/generateRecipe.handler
+    timeout: 30 # Function-specific timeout
+    events:
+      - httpApi:
+          path: /recipe/generate
+          method: post
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+    lambdaTimeout: 30 # Also set timeout for offline mode
+  dotenv:
+    path: ./.env
+    include:
+      - OPENAI_API_KEY 

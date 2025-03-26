@@ -1,0 +1,27 @@
+{
+  "name": "recipe-serverless",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "serverless offline",
+    "deploy": "serverless deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "recipe",
+    "openai",
+    "serverless"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "Serverless backend for recipe generation with OpenAI",
+  "devDependencies": {
+    "serverless": "^3.38.0",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-offline": "^13.3.0"
+  },
+  "dependencies": {
+    "aws-lambda": "^1.0.7",
+    "openai": "^4.89.0"
+  }
+}
